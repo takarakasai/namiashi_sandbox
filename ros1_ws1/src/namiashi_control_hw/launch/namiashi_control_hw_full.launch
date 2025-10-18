@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<launch>
+  <env name="ROSCONSOLE_FORMAT" value="[${severity}] [${time}] [${node}] [${file}:${line}] ${message}" />
+
+  <!-- ログレベルをDEBUGに設定 -->
+  <param name="/rosconsole/logger_level" value="DEBUG" />
+
+  <rosparam file="$(find namiashi_control_hw)/config/default.yaml" />
+  <param name="control/serial_port" value="/dev/ttyUSB0"/>
+  <param name="control/baudrate" value="1000000"/>
+
+  <param name="robot_description" textfile="$(find namiashi_description)/urdf/namiashi.urdf"/>
+
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+
+  <node pkg="namiashi_control_hw"
+        type="namiashi_control_hw_node"
+        name="controller_manager"
+        clear_params="true"
+        output="screen"
+        args="--ros-args --log-level DEBUG"
+        />
+
+  <node name="controller_spawner"
+        pkg="controller_manager"
+        type="spawner"
+        respawn="false"
+        clear_params="true"
+        output="screen"
+        args="/joint_state_controller
+              /traj_controller"
+        />
+</launch>

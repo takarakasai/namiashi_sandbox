@@ -1,0 +1,5 @@
+<launch>
+  <param name="port" value="/dev/ttyUSB0"/>
+  <param name="baudrate" value="115200"/>
+  <node pkg="teleop_sbus" type="teleop_sbus_node" name="teleop_sbus_node" output="screen"/>
+</launch>

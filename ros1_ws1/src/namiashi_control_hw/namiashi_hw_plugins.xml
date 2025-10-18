@@ -1,0 +1,9 @@
+<library path="lib/libnamiashi_control_hw">
+  <class name="dp/NamiashiHardwareInterface"
+         type="dp::NamiashiHardwareInterface"
+         base_class_type="hardware_interface::RobotHW">
+    <description>
+      Namiashi hardware_interface implementation for ROS1.
+    </description>
+  </class>
+</library>
